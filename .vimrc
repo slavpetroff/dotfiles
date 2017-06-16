@@ -1,13 +1,17 @@
-execute pathogen#infect()
-syntax on
+" Pathogen load
+filetype off
+
+call pathogen#infect()
+call pathogen#helptags()
+
 filetype plugin indent on
-syntax enable
+syntax on
 
 " Turn on line numbering
 set nu
 
-" set background=dark
-" colorscheme solarized
+set background=dark
+colorscheme darkblue
 
 set nocompatible              " required
 filetype off                  " required
@@ -36,6 +40,12 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
 " Plugin 'vim-airline/vim-airline'
 Plugin 'easymotion/vim-easymotion'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+" Optional
+Plugin 'honza/vim-snippets'
 
 " Set airline appear always
  "set laststatus=2
@@ -118,3 +128,20 @@ map <Leader>k <Plug>(easymotion-k)
 
 set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
 set laststatus=2
+
+" Pymode settings
+let g:pymode_python = 'python3'
+" Override view python doc key shortcut to Ctrl-Shift-d
+let g:pymode_doc_bind = "<C-S-d>"
+let g:pymode_rope = 0 
+let g:pymode_rope_lookup_project = 0 
+let g:pymode_rope_complete_on_dot = 0 
+let g:pymode_rope_lookup_project = 0
+
+" Indentation guides
+let g:indent_guides_auto_colors = 0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
+set ts=4 sw=4 et
+let g:indent_guides_start_level = 2
+let g:indent_guides_guide_size =1
