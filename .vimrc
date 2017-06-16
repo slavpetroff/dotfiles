@@ -34,16 +34,18 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-fugitive'
-Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline'
+Plugin 'easymotion/vim-easymotion'
 
 " Set airline appear always
-set laststatus=2
+ "set laststatus=2
 
 " Hide pyc files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
 
 
 " Make the code look pretty
+
 let python_highlight_all=1
 syntax on
 
@@ -95,4 +97,24 @@ set encoding=utf-8
 let g:ycm_autoclose_preview_window_after_completion=1
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
+" Easy motion setups
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
 
+" Jump to anywhere you want with minimal keystrokes, with just one key
+" binding.
+" " `s{char}{label}`
+nmap s <Plug>(easymotion-overwin-f)
+" " or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap s <Plug>(easymotion-overwin-f2)
+"
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+"
+" JK motions: Line motions
+map <Leader>j <Plug>(easymotion-j)
+map <Leader>k <Plug>(easymotion-k)
+
+set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
+set laststatus=2
