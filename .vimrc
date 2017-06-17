@@ -151,3 +151,15 @@ autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
 set ts=4 sw=4 et
 let g:indent_guides_start_level = 2
 let g:indent_guides_guide_size =1
+
+" Turn on line numbering
+set nu
+
+" Display all matching files when we tab complete 
+set wildmenu
+
+" Display the typed command
+set showcmd
+
+" Set relativenumber
+set relativenumber
