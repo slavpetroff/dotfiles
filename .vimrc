@@ -13,6 +13,9 @@ set nu
 " Display all matching files when we tab complete 
 set wildmenu
 
+" Display the typed command
+set showcmd
+
 set background=dark
 colorscheme darkblue
 
