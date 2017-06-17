@@ -1,6 +1,7 @@
 " Pathogen load
 filetype off
 
+set autoindent
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -85,15 +86,17 @@ set foldlevel=99
 " Enable folding with the spacebar
 nnoremap <space> za
 
-" Proper Python PEP8 Indentation
-au BufNewFile,BufRead *.py
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
+" Python, PEP-008
+au BufRead,BufNewFile *.py,*.pyw set expandtab
+au BufRead,BufNewFile *.py,*.pyw set textwidth=139
+au BufRead,BufNewFile *.py,*.pyw set tabstop=4
+au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
+au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
+au BufRead,BufNewFile *.py,*.pyw set autoindent
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
+au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
+au BufNewFile *.py,*.pyw set fileformat=unix
+au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
 
 " Set Proper HTML/CSS/JS indentation
 au BufNewFile,BufRead *.js, *.html, *.css
@@ -103,7 +106,7 @@ au BufNewFile,BufRead *.js, *.html, *.css
 
 
 " Flagging Unnecessary Whitespace
-au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
 
 " UTF-8 Encoding
 set encoding=utf-8
@@ -137,6 +140,7 @@ set laststatus=2
 
 " Pymode settings
 let g:pymode_python = 'python3'
+
 " Override view python doc key shortcut to Ctrl-Shift-d
 let g:pymode_doc_bind = "<C-S-d>"
 let g:pymode_rope = 0 
@@ -163,3 +167,6 @@ set showcmd
 
 " Set relativenumber
 set relativenumber
+
+" Set rename the word under the cursor
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
