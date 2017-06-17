@@ -10,6 +10,9 @@ syntax on
 " Turn on line numbering
 set nu
 
+" Display all matching files when we tab complete 
+set wildmenu
+
 set background=dark
 colorscheme darkblue
 
