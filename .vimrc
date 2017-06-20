@@ -7,117 +7,130 @@ call pathogen#helptags()
 
 filetype plugin indent on
 syntax on
+" -----------------
 
-" Turn on line numbering
-set nu
-
-" Display all matching files when we tab complete 
-set wildmenu
-
-" Display the typed command
-set showcmd
-
-set background=dark
-colorscheme darkblue
-
-set nocompatible              " required
+" Vundle setup
+set nocompatible              " be iMproved, required
 filetype off                  " required
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
 " let Vundle manage Vundle, required
-
-" Add all your plugins here (note older versions of Vundle used Bundle instead of Plugin)
-Plugin 'gmarik/Vundle.vim'
-Plugin 'vim-scripts/indentpython.vim'
-Plugin 'tmhedberg/SimpylFold'
-Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
-Plugin 'nvie/vim-flake8'
-Plugin 'jnurmine/Zenburn'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'VundleVim/Vundle.vim'
+Plugin 'w0rp/ale'
+Plugin 'Chiel92/vim-autoformat'
+Plugin 'fisadev/vim-isort'
+Plugin 'Yggdroot/indentLine'
 Plugin 'kien/ctrlp.vim'
-Plugin 'tpope/vim-fugitive'
-" Plugin 'vim-airline/vim-airline'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
-
-" Optional
-Plugin 'honza/vim-snippets'
-
-" Set airline appear always
- "set laststatus=2
-
-" Hide pyc files in NERDTree
-let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
-
-
-" Make the code look pretty
-
-let python_highlight_all=1
-syntax on
-
-" Set python path for YCM
-let g:ycm_python_binary_path = 'python3'
+Plugin 'skywind3000/asyncrun.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'davidhalter/jedi-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
+" -----------------
 
 " Split navigations
 nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>
+" -----------------
 
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
+" Turn on line numbering
+set nu
+" -----------------
+
+" Display all matching files when we tab complete
+set wildmenu
+" -----------------
+
+" Display the typed command
+set showcmd
+" -----------------
+
+" Colorschema
+colorscheme space-vim-dark
+hi Comment cterm=italic
+
+"   Range:   233 (darkest) ~ 238 (lightest)
+"   Default: 235
+let g:space_vim_dark_background = 236
+color space-vim-dark
+" -----------------
+
+" Set relativenumber
+set relativenumber
+" -----------------
+
+" Autoformat upon vim exit
+noremap <F4> :Autoformat<CR>
+au BufWrite * :Autoformat
+" -----------------
+
+" Formatprograms
+let g:formatter_yapf_style = 'facebook'
+" -----------------
+
+" Sort imports
+let g:vim_isort_python_version = 'python3'
+let g:vim_isort_map = '<C-i>'
+" -----------------
+
+" NERD Commenter
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" -----------------
+
+" Autocompleter
+" let g:completor_python_binary = '/usr/local/lib/python3.5/dist-packages/jedi'
+
+" Tab key for autocomplete
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+" -----------------
+
+" Hide pyc files in NERDTree
+let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+" -----------------
 
 " Enable folding with the spacebar
 nnoremap <space> za
-
-" Python, PEP-008
-au BufRead,BufNewFile *.py,*.pyw set expandtab
-au BufRead,BufNewFile *.py,*.pyw set textwidth=139
-au BufRead,BufNewFile *.py,*.pyw set tabstop=4
-au BufRead,BufNewFile *.py,*.pyw set softtabstop=4
-au BufRead,BufNewFile *.py,*.pyw set shiftwidth=4
-au BufRead,BufNewFile *.py,*.pyw set autoindent
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /^\t\+/
-au BufRead,BufNewFile *.py,*.pyw match BadWhitespace /\s\+$/
-au BufNewFile *.py,*.pyw set fileformat=unix
-au BufRead,BufNewFile *.py,*.pyw let b:comment_leader = '#'
-
-" Set Proper HTML/CSS/JS indentation
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
-
-
-" Flagging Unnecessary Whitespace
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+" -----------------
 
 " UTF-8 Encoding
 set encoding=utf-8
-
-" The former line ensures that the autocomplete window goes away when you’re
-" done with it, and the latter defines a shortcut for goto definition.
-let g:ycm_autoclose_preview_window_after_completion=1
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+" -----------------
 
 " Easy motion setups
 let g:EasyMotion_do_mapping = 0 " Disable default mappings
+" -----------------
 
 " Jump to anywhere you want with minimal keystrokes, with just one key
 " binding.
@@ -134,39 +147,43 @@ let g:EasyMotion_smartcase = 1
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
+" -----------------
 
+" Set powerline
 set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
 set laststatus=2
-
-" Pymode settings
-let g:pymode_python = 'python3'
-
-" Override view python doc key shortcut to Ctrl-Shift-d
-let g:pymode_doc_bind = "<C-S-d>"
-let g:pymode_rope = 0 
-let g:pymode_rope_lookup_project = 0 
-let g:pymode_rope_complete_on_dot = 0 
-let g:pymode_rope_lookup_project = 0
-
-" Indentation guides
-let g:indent_guides_auto_colors = 0
-autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd  ctermbg=black
-autocmd VimEnter,Colorscheme * :hi IndentGuidesEven ctermbg=darkgrey
-set ts=4 sw=4 et
-let g:indent_guides_start_level = 2
-let g:indent_guides_guide_size =1
-
-" Turn on line numbering
-set nu
-
-" Display all matching files when we tab complete 
-set wildmenu
-
-" Display the typed command
-set showcmd
-
-" Set relativenumber
-set relativenumber
+" -----------------
 
 " Set rename the word under the cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
+" -----------------
+
+" Tmux config
+let g:tmux_navigator_no_mappings = 1
+
+nnoremap <silent> <Left> :TmuxNavigateLeft<cr>
+nnoremap <silent> <Down> :TmuxNavigateDown<cr>
+nnoremap <silent> <Up> :TmuxNavigateUp<cr>
+nnoremap <silent> <Right> :TmuxNavigateRight<cr>
+" -----------------
+
+" Jedi-vim
+let g:jedi#show_call_signatures = "1"
+let g:jedi#goto_command = "<leader>d"
+let g:jedi#goto_assignments_command = "<leader>g"
+let g:jedi#goto_definitions_command = "<C-leader>d"
+let g:jedi#documentation_command = "K"
+let g:jedi#usages_command = "<leader>n"
+let g:jedi#completions_command = "<C-Space>"
+let g:jedi#rename_command = "<leader>r"
+let g:jedi#use_tabs_not_buffers = 1
+" -----------------
+
+" Highlight the word under the cursor
+autocmd CursorMoved * exe printf('match Visual /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+" -----------------
+
+" Remape CAPS-LOCK to ESCAPE
+au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+" -----------------
