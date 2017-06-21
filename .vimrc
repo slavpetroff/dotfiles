@@ -31,6 +31,7 @@ Plugin 'skywind3000/asyncrun.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'davidhalter/jedi-vim'
+Plugin 'tmhedberg/SimpylFold'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -76,7 +77,7 @@ au BufWrite * :Autoformat
 " -----------------
 
 " Formatprograms
-let g:formatter_yapf_style = 'facebook'
+let g:formatter_yapf_style = 'google'
 " -----------------
 
 " Sort imports
@@ -158,15 +159,6 @@ set laststatus=2
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " -----------------
 
-" Tmux config
-let g:tmux_navigator_no_mappings = 1
-
-nnoremap <silent> <Left> :TmuxNavigateLeft<cr>
-nnoremap <silent> <Down> :TmuxNavigateDown<cr>
-nnoremap <silent> <Up> :TmuxNavigateUp<cr>
-nnoremap <silent> <Right> :TmuxNavigateRight<cr>
-" -----------------
-
 " Jedi-vim
 let g:jedi#show_call_signatures = "1"
 let g:jedi#goto_command = "<leader>d"
@@ -197,4 +189,9 @@ autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 " Remape CAPS-LOCK to ESCAPE
 au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+" -----------------
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
 " -----------------
