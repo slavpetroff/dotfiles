@@ -180,7 +180,18 @@ let g:jedi#use_tabs_not_buffers = 1
 " -----------------
 
 " Highlight the word under the cursor
-autocmd CursorMoved * exe printf('match Visual /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+" autocmd CursorMoved * exe printf('match Visual /\V\<%s\>/', escape(expand('<cword>'), '/\'))
+set updatetime=300
+
+function! HighlightWordUnderCursor()
+	if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
+		exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/'
+	else
+		match none
+	endif
+endfunction
+
+autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
 " -----------------
 
 " Remape CAPS-LOCK to ESCAPE
