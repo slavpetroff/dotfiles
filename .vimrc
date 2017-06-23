@@ -1,7 +1,7 @@
-" Pathogen load
+" Pathogen setup
 filetype off
 
-set autoindent
+"set autoindent
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -23,13 +23,11 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'w0rp/ale'
 Plugin 'Chiel92/vim-autoformat'
-"Plugin 'fisadev/vim-isort'
 Plugin 'Yggdroot/indentLine'
-"Plugin 'kien/ctrlp.vim'
+Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-"Plugin 'davidhalter/jedi-vim'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
@@ -74,7 +72,7 @@ set relativenumber
 
 " Autoformat upon vim exit
 noremap <F4> :Autoformat<CR>
-au BufWrite * :Autoformat
+" au BufWrite * :Autoformat
 " -----------------
 
 " Formatprograms
@@ -109,9 +107,6 @@ let g:NERDCommentEmptyLines = 1
 let g:NERDTrimTrailingWhitespace = 1
 " -----------------
 
-" Autocompleter
-" let g:completor_python_binary = '/usr/local/lib/python3.5/dist-packages/jedi'
-
 " Tab key for autocomplete
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
@@ -145,7 +140,7 @@ nmap s <Plug>(easymotion-overwin-f2)
 "
 " Turn on case insensitive feature
 let g:EasyMotion_smartcase = 1
-"
+
 " JK motions: Line motions
 map <Leader>j <Plug>(easymotion-j)
 map <Leader>k <Plug>(easymotion-k)
@@ -159,33 +154,6 @@ set laststatus=2
 " Set rename the word under the cursor
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " -----------------
-
-" Jedi-vim
-" let g:jedi#show_call_signatures = "1"
-" let g:jedi#goto_command = "<leader>d"
-" let g:jedi#goto_assignments_command = "<leader>g"
-" let g:jedi#goto_definitions_command = "<C-leader>d"
-" let g:jedi#documentation_command = "K"
-" let g:jedi#usages_command = "<leader>n"
-" let g:jedi#completions_command = "<C-Space>"
-" let g:jedi#rename_command = "<leader>r"
-" let g:jedi#use_tabs_not_buffers = 1
-" -----------------
-
-" Highlight the word under the cursor
-" autocmd CursorMoved * exe printf('match Visual /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-" set updatetime=300
-"
-" function! HighlightWordUnderCursor()
-"         if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
-"                 exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/'
-"         else
-"                 match none
-"         endif
-" endfunction
-"
-" autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
-" " -----------------
 
 " Remape CAPS-LOCK to ESCAPE
 au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
@@ -204,12 +172,24 @@ set ttimeoutlen=5
 
 " YCM settings
 let g:ycm_python_binary_path = "/usr/bin/python3.5"
+let g:ycm_path_to_python_interpreter = "/usr/bin/python3"
 let g:ycm_add_preview_to_completeopt = 0
 set completeopt-=preview
 let mapleader=","
 nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>gg :YcmCompleter GoTo<CR>
+nnoremap <leader>g :YcmCompleter GoTo<CR>
 nnoremap <leader>fr :YcmCompleter GoToReferences<CR>
 let g:ycm_seed_identifiers_with_syntax = 1
+" -----------------
+
+" Python with virtualenv support
+python3 << EOF
+import os
+import sys
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
 " -----------------
