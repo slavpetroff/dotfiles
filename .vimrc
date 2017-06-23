@@ -23,15 +23,16 @@ call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'w0rp/ale'
 Plugin 'Chiel92/vim-autoformat'
-Plugin 'fisadev/vim-isort'
+"Plugin 'fisadev/vim-isort'
 Plugin 'Yggdroot/indentLine'
-Plugin 'kien/ctrlp.vim'
+"Plugin 'kien/ctrlp.vim'
 Plugin 'easymotion/vim-easymotion'
-Plugin 'skywind3000/asyncrun.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'davidhalter/jedi-vim'
+"Plugin 'davidhalter/jedi-vim'
 Plugin 'tmhedberg/SimpylFold'
+Plugin 'tpope/vim-surround'
+Plugin 'Valloric/YouCompleteMe'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -160,31 +161,31 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " -----------------
 
 " Jedi-vim
-let g:jedi#show_call_signatures = "1"
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = "<C-leader>d"
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-let g:jedi#use_tabs_not_buffers = 1
+" let g:jedi#show_call_signatures = "1"
+" let g:jedi#goto_command = "<leader>d"
+" let g:jedi#goto_assignments_command = "<leader>g"
+" let g:jedi#goto_definitions_command = "<C-leader>d"
+" let g:jedi#documentation_command = "K"
+" let g:jedi#usages_command = "<leader>n"
+" let g:jedi#completions_command = "<C-Space>"
+" let g:jedi#rename_command = "<leader>r"
+" let g:jedi#use_tabs_not_buffers = 1
 " -----------------
 
 " Highlight the word under the cursor
 " autocmd CursorMoved * exe printf('match Visual /\V\<%s\>/', escape(expand('<cword>'), '/\'))
-set updatetime=300
-
-function! HighlightWordUnderCursor()
-	if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
-		exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/'
-	else
-		match none
-	endif
-endfunction
-
-autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
-" -----------------
+" set updatetime=300
+"
+" function! HighlightWordUnderCursor()
+"         if getline(".")[col(".")-1] !~# '[[:punct:][:blank:]]'
+"                 exec 'match' 'Visual' '/\V\<'.expand('<cword>').'\>/'
+"         else
+"                 match none
+"         endif
+" endfunction
+"
+" autocmd! CursorHold,CursorHoldI * call HighlightWordUnderCursor()
+" " -----------------
 
 " Remape CAPS-LOCK to ESCAPE
 au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
@@ -194,4 +195,21 @@ au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 " Enable folding
 set foldmethod=indent
 set foldlevel=99
+" -----------------
+
+" Speeding up vim
+set timeoutlen=1000
+set ttimeoutlen=5
+" -----------------
+
+" YCM settings
+let g:ycm_python_binary_path = "/usr/bin/python3.5"
+let g:ycm_add_preview_to_completeopt = 0
+set completeopt-=preview
+let mapleader=","
+nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>gf :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>gg :YcmCompleter GoTo<CR>
+nnoremap <leader>fr :YcmCompleter GoToReferences<CR>
+let g:ycm_seed_identifiers_with_syntax = 1
 " -----------------
