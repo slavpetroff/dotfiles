@@ -240,6 +240,7 @@ nnoremap <leader>gco :Gread<CR>
 nnoremap <leader>ga :Gwrite<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gl :Shell git log<CR>
+nnoremap <leader>gp :Gpush<CR>
 " -----------------
 
 " Shell command for writing a bash command`s output to new tab
