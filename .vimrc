@@ -1,7 +1,7 @@
 " Pathogen setup
 filetype off
 
-"set autoindent
+"Set autoindent
 call pathogen#infect()
 call pathogen#helptags()
 
@@ -115,6 +115,9 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
 " Hide pyc files in NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$'] "ignore files in NERDTree
+
+" Map toggle of the NERDTree
+map <F5> :NERDTreeToggle<CR>
 " -----------------
 
 " Enable folding with the spacebar
@@ -192,4 +195,8 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+" -----------------
+
+" Set mappings for opening a new tab
+nnoremap <F6> :tabe %<CR>
 " -----------------
