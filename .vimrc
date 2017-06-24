@@ -240,7 +240,7 @@ nnoremap <leader>gco :Gread<CR>
 nnoremap <leader>ga :Gwrite<CR>
 nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gl :Shell git log<CR>
-" -------------- ---
+" -----------------
 
 " Shell command for writing a bash command`s output to new tab
 command! -complete=shellcmd -nargs=+ Shell call s:RunShellCommand(<q-args>)
@@ -262,4 +262,8 @@ function! s:RunShellCommand(cmdline)
   setlocal nomodifiable
   1
 endfunction
-" -------------- ---
+" -----------------
+
+" Set default split positions
+set splitright
+" -----------------
