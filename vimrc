@@ -1,14 +1,3 @@
-" Pathogen setup
-filetype off
-
-"Set autoindent
-call pathogen#infect()
-call pathogen#helptags()
-
-filetype plugin indent on
-syntax on
-" -----------------
-
 " Vundle setup
 set nocompatible              " be iMproved, required
 filetype off                  " required
@@ -53,6 +42,10 @@ set nu
 
 " Display all matching files when we tab complete
 set wildmenu
+" -----------------
+
+" Set default split positions
+set splitright
 " -----------------
 
 " Display the typed command
@@ -153,7 +146,6 @@ map <Leader>k <Plug>(easymotion-k)
 " -----------------
 
 " Set powerline
-set rtp+=/usr/local/lib/python3.5/dist-packages/powerline/bindings/vim/
 set laststatus=2
 " -----------------
 
@@ -255,8 +247,4 @@ function! s:ExecuteInShell(command)
   echo 'Shell command ' . command . ' executed.'
 endfunction
 command! -complete=shellcmd -nargs=+ Shell call s:ExecuteInShell(<q-args>)
-" -----------------
-
-" Set default split positions
-set splitright
 " -----------------
