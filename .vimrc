@@ -31,6 +31,9 @@ Plugin 'scrooloose/nerdcommenter'
 Plugin 'tmhedberg/SimpylFold'
 Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'tpope/vim-fugitive'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -191,12 +194,41 @@ python3 << EOF
 import os
 import sys
 if 'VIRTUAL_ENV' in os.environ:
-    project_base_dir = os.environ['VIRTUAL_ENV']
-    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
-    execfile(activate_this, dict(__file__=activate_this))
+	project_base_dir = os.environ['VIRTUAL_ENV']
+	activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+	execfile(activate_this, dict(__file__=activate_this))
 EOF
 " -----------------
 
 " Set mappings for opening a new tab
-nnoremap <F6> :tabe %<CR>
+nnoremap <F6> :tabe <CR>
+" -----------------
+
+" Airline setups
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#left_sep = '▶'
+let g:airline#extensions#tabline#right_sep = '◀'
+
+if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
+	if !exists('g:airline_theme')
+		let g:airline_theme = 'luna'
+	endif
+	if !exists('g:airline_powerline_fonts')
+		" Use the default set of separators with a few customizations
+		" let g:airline_left_sep='»'  " Slightly fancier than '>'
+		" let g:airline_right_sep='«' " Slightly fancier than '<'
+		" >
+		let g:airline_left_sep='▶'
+		let g:airline_right_sep='◀'
+
+	endif
+endif
+let g:airline_symbols = {}
+let g:airline_symbols.linenr = '␊'
+let g:airline_symbols.linenr = '␤'
+let g:airline_symbols.linenr = '¶'
+let g:airline_symbols.branch = '⎇'
+let g:airline_symbols.paste = 'ρ'
+let g:airline_symbols.paste = 'Þ'
+let g:airline_symbols.paste = '∥'
 " -----------------
