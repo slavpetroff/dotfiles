@@ -197,6 +197,10 @@ EOF
 nnoremap <F6> :tabe <CR>
 " -----------------
 
+" Set mappings for executing Python code inside vim
+nnoremap <buffer> <F9> :exec '!python3' shellescape(@%, 1)<CR>
+" -----------------
+
 " Airline setups
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#left_sep = '▶'
