@@ -161,9 +161,10 @@ set laststatus=2
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>//g<Left><Left>
 " -----------------
 
-" Remape CAPS-LOCK to ESCAPE
-au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
-au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
+" Remape CAPS-LOCK to ESCAPE / Commented since they are already inverted
+" in the `Xmodmap` file
+"au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
+"au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
 " -----------------
 
 " Enable folding
