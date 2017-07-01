@@ -23,6 +23,7 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
+Plugin 'edkolev/promptline.vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -218,6 +219,7 @@ if isdirectory(expand("~/.vim/bundle/vim-airline-themes/"))
 endif
 
 let g:airline_symbols = {}
+let g:airline_left_alt_sep = '>'
 let g:airline_symbols.linenr = '␊'
 let g:airline_symbols.linenr = '␤'
 let g:airline_symbols.linenr = '¶'
