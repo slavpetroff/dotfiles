@@ -118,3 +118,7 @@ fi
 
 # Custom settings
 source ~/.shell_prompt.sh
+
+# Set Vim as default editor
+export VISUAL=vim
+export EDITOR="$VISUAL"
